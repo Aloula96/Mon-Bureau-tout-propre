@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mon Bureau Tout Propre</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <div class="topnav" id="myTopnav">
+      <a href="#about" class="active">Qui somme nous?</a>
+      <a href="#services1">Nos Services</a>
+      <a href="#container1">Formulaire</a>
+    
+      </a>
+    </div>
+  </head>
+  <body>
+    <div id="logo">
+      <img src="./1.png" alt="" />
+    </div>
+
+    <section class="about">
+      <div class="about-image" id="#about">
+        <h1>Qui sommes-nous?</h1>
+
+        <p>
+          Mon Bureau Tout Propre est un service de nettoyage professionnel dédié
+          aux entreprises qui souhaitent offrir à leurs collaborateurs un
+          environnement de travail sain, agréable et toujours impeccable. Nous
+          proposons des prestations adaptées à vos besoins : entretien régulier
+          de vos bureaux, nettoyage des vitres, désinfection et hygiène
+          complète. Flexibles et transparents, nous vous garantissons un service
+          fiable, rapide et respectueux de l’environnement, avec des tarifs
+          clairs et personnalisés. Offrez à votre équipe un espace de travail
+          propre et motivant – nous nous occupons du reste !
+        </p>
+      </div>
+    </section>
+<section class="services">
+  <div class="services-image"  id="#services1">
+    <h1>Nos services</h1>
+    <img src="./2.png" alt="" />
+  </div>
+</section>
+
+     
+
+    <section class="container" id="#container1">
+      <!-- Surface -->
+      <label for="surface">Surface :</label>
+      <input type="number" id="surface" placeholder="surface en m²" />
+      <br /><br />
+
+      <!-- Fréquence -->
+      <label for="frequency">Fréquence :</label>
+      <select id="frequency" name="frequency">
+        <option value="">-- Sélectionnez une fréquence --</option>
+        <option value="1">Une fois par semaine</option>
+        <option value="2">Deux fois par semaine</option>
+        <option value="5">Tous les jours</option>
+      </select>
+      <br /><br />
+
+      <!-- Options vitre -->
+      <label for="windows">Options : Vitres incluses ?</label>
+      <select id="windows" name="windows">
+        <option value="">-- Sélectionnez --</option>
+        <option value="yes">Oui</option>
+        <option value="no">Non</option>
+      </select>
+      <br /><br />
+
+      <!--Zone TVA-->
+      <label for="tva">TVA (%)</label>
+      <input type="number" id="tva" value="20" />
+      <br /><br />
+
+      <!-- Zone de log -->
+      <p id="log"></p>
+
+      <!-- Bouton -->
+      <button id="Submit">Valider</button>
+    </section>
+
+    <script>
+      const surfaceInput = document.getElementById("surface");
+      const frequencySelect = document.getElementById("frequency");
+      const windowsSelect = document.getElementById("windows");
+      const log = document.getElementById("log");
+      const submitButton = document.getElementById("Submit");
+      const tvaInput = document.getElementById("tva");
+
+      submitButton.addEventListener("click", () => {
+        let surfaceTarrif = parseFloat(surfaceInput.value);
+        let frequency = parseInt(frequencySelect.value);
+        let windows = windowsSelect.value;
+        let tvaValue = parseFloat(tvaInput.value) / 100; // ex: 20% => 0.2
+
+        let nombre = surfaceTarrif * 1.5;
+
+        if (frequency) {
+          nombre *= frequency;
+        }
+
+        if (windows === "yes") {
+          nombre += 0.1 * surfaceTarrif;
+        }
+
+        let prixHT = nombre;
+        let prixTTC = prixHT * (1 + tvaValue);
+
+        log.textContent = `Tarif HT : ${prixHT.toFixed(2)} € | Tarif TTC (TVA ${
+          tvaValue * 100
+        }%) : ${prixTTC.toFixed(2)} €`;
+      });
+    </script>
+  </body>
+</html>
